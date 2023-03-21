@@ -5,24 +5,23 @@ body {
     font-family: "Roboto Mono", sans-serif;
 }
 
-h1 {
-    position: center;
+#gameTitle {
     text-align: center;
 }
 
-.gameScore {
+#gameScore {
     text-align: center;
 }
 
 hr {
-    width: 500px;
+    width: 410px;
     height: 1px;
     background-color: solid black;
     border: solid black;
     position: relative;
 }
 
-.gameBoard {
+#gameBoard {
     width: 400px;
     height: 400px;
 
