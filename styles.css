@@ -5,6 +5,14 @@ body {
     font-family: "Roboto Mono", sans-serif;
 }
 
+hr {
+    width: 410px;
+    height: 1px;
+    background-color: solid black;
+    border: solid black;
+    position: relative;
+}
+
 #gameTitle {
     text-align: center;
 }
@@ -13,12 +21,17 @@ body {
     text-align: center;
 }
 
-hr {
-    width: 410px;
-    height: 1px;
-    background-color: solid black;
-    border: solid black;
-    position: relative;
+#attribution {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 0.8rem;
+    font-weight: bolder;
+    background-color: #a9b7c1;
+    padding: 10px;
+    border-radius: 10px;
+    color: #1d2326;
+    box-shadow: 1px 2px 5px 1px rgba(255, 255, 255, 0.2);
 }
 
 #gameBoard {
