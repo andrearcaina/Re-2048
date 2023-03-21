@@ -24,15 +24,21 @@
     </script>
 </head>
 <body>
-    <h1 id = "gameTitle"> 2048 </h1>
     
-    <hr>
     
     <div>
+        <h1 id = "gameTitle"> 2048 </h1>
         <h2 id = "gameScore"> Score: 
             <span id = "intScore"> 0 </span> 
         </h2>
     </div>
+    
+    <div id = "restartGame">
+        <button class = "button" onclick = "restartGame()"> 
+            New Game 
+        </button>
+    </div>
+    <hr>
 
     <div id = "gameBoard">
         <!-- empty for adjustment through JS and CSS -->
@@ -40,7 +46,7 @@
 
     <div>  
         <p id="attribution">
-            What's up!
+            Githubbb!
             <a href="https://github.com/andrearcaina" target="_top">@andrearcaina</a>
         </p>
     </div> 

@@ -3,6 +3,7 @@
 body {
     background-color: rgb(226, 211, 211);
     font-family: "Roboto Mono", sans-serif;
+    overflow: hidden;
 }
 
 hr {
@@ -11,35 +12,71 @@ hr {
     background-color: solid black;
     border: solid black;
     position: relative;
+    top: 25px;
 }
 
 #gameTitle {
     text-align: center;
+    position: relative;
+    top: 110px;
+    right: 130px;
+
+    font-size: 50px;
 }
 
 #gameScore {
     text-align: center;
+    position: relative;
+
+    font-size: 25px;
+    left: 100px;
+}
+
+#restartGame {
+    text-align: center;
+    position: relative;
+    left: 100px;
+}
+
+.button {
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+
+    background-color: #cdc1b5;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: rgba(29, 236, 101, 0.2);
 }
 
 #attribution {
     position: absolute;
     right: 20px;
     bottom: 20px;
+    
     font-size: 0.8rem;
     font-weight: bolder;
+    
     background-color: #a9b7c1;
     padding: 10px;
     border-radius: 10px;
+    
     color: #1d2326;
     box-shadow: 1px 2px 5px 1px rgba(255, 255, 255, 0.2);
 }
 
 #gameBoard {
+    position: relative;
+    top: 50px;
     width: 400px;
     height: 400px;
 
     background-color: #cdc1b5;
     border: 6px solid #bbada0;
+    border-radius: 8px;
 
     margin: 0 auto;
     display: flex;

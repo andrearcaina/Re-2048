@@ -1,11 +1,28 @@
 let board; let score = 0;           //these variables can be changed 
 const ROWS = 4; const COLS = 4;     //these cannot be changed
 
+// on load, call setUpGame()
+window.onload = () => setupGame();
+
+/*
+    reset the game by deleting all the divs present
+    and then calling the setUpGame() function to start a new game
+*/
+function restartGame() {
+    for(let row = 0; row < ROWS; row++) {
+        for(let col = 0; col < COLS; col++) {
+            let gameTile = document.getElementById(row.toString() + "-" + col.toString());
+            gameTile.remove();
+        }
+    }
+    setupGame();
+}
+
 /* 
     set up the game board for 2048
     basically a matrix or a 4x4 array
 */
-window.onload = function() {
+function setupGame() {
     board =    [[0,0,0,0],
                 [0,0,0,0],
                 [0,0,0,0],             
