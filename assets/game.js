@@ -28,8 +28,8 @@ function setupGame() {
                 [0,0,0,0],             
                 [0,0,0,0]
                 ]
-    for(let row = 0; row < ROWS; row++){
-        for(let col = 0; col < COLS; col++){
+    for(let row = 0; row < ROWS; row++) {
+        for(let col = 0; col < COLS; col++) {
             let gameTile = document.createElement("div"); 
             let number = board[row][col];
             const BOARD = document.getElementById("gameBoard");
@@ -87,8 +87,17 @@ function blockTwo() {
         if (board[row][col] == 0) {
             board[row][col] = 2;
             let gameTile_ID = document.getElementById(row.toString() + "-" + col.toString());
-            gameTile_ID.innerText = "2";
-            gameTile_ID.classList.add("t2");
+            let percentage = Math.floor((Math.random() * 10)+1);
+            let string = "";
+            /*
+                90% to get a 2
+                10% to get a 4
+            */
+            if (percentage > 1) { string = "2"; }
+            if (percentage == 1) { string = "4"; }
+            
+            gameTile_ID.innerText = string;
+            gameTile_ID.classList.add("t"+string);
             tileFound = true;
         }
     }
