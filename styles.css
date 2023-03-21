@@ -1,8 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono&subset=cyrillic");
 
 body {
     background-color: rgb(226, 211, 211);
-    font-family: "Nunito Sans", sans-serif;
+    font-family: "Roboto Mono", sans-serif;
+}
+
+h1 {
+    position: center;
+    text-align: center;
+}
+
+.gameScore {
     text-align: center;
 }
 
@@ -11,6 +19,7 @@ hr {
     height: 1px;
     background-color: solid black;
     border: solid black;
+    position: relative;
 }
 
 .gameBoard {
@@ -23,4 +32,17 @@ hr {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+}
+
+.gameTile {
+    width: 90px;
+    height: 90px;
+    border: 5px solid #bbada0;
+    
+    font-size: 40px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
