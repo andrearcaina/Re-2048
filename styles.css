@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
+
+body {
+    background-color: rgb(226, 211, 211);
+    font-family: "Nunito Sans", sans-serif;
+    text-align: center;
+}
+
+hr {
+    width: 500px;
+    height: 1px;
+    background-color: solid black;
+    border: solid black;
+}
+
+.gameBoard {
+    width: 400px;
+    height: 400px;
+
+    background-color: #cdc1b5;
+    border: 6px solid #bbada0;
+
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
