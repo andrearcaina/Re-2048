@@ -13,8 +13,7 @@ hr {
     width: 410px;
     margin: 0 auto;
     
-    background-color: solid black;
-    border: solid black;
+    border: solid rgb(146, 141, 141);
     border-radius: 5px;
 
     top: 0px;
@@ -27,7 +26,7 @@ hr {
     right: 90px;
 
     font-size: 65px;
-    color: #9a8e84;
+    color: #847971;
     border-color: 5px;
 }
 
@@ -92,14 +91,26 @@ hr {
     flex-wrap: wrap;
 }
 
+.gridCell {
+    width: 90px;
+    height: 90px;
+    border: 5px solid #bbada0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .gameTile {
     width: 90px;
     height: 90px;
     border: 5px solid #bbada0;
-    
+
     font-size: 40px;
     font-weight: bold;
 
+    position: relative;
+    top: -400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,7 +120,7 @@ hr {
 
 @keyframes show {
     0% {
-        opacity: .5;
+        opacity: .2;
         transform: scale(0);
     }
 }
