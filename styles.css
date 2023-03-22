@@ -3,25 +3,32 @@
 body {
     background-color: rgb(226, 211, 211);
     font-family: "Roboto Mono", sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 hr {
+    text-align: center;
+    position: relative;
+    
     width: 410px;
-    height: 1px;
+    margin: 0 auto;
+    
     background-color: solid black;
     border: solid black;
-    position: relative;
-    top: 25px;
+    border-radius: 5px;
+
+    top: 0px;
 }
 
 #gameTitle {
     text-align: center;
     position: relative;
-    top: 110px;
-    right: 130px;
+    top: 125px;
+    right: 90px;
 
-    font-size: 50px;
+    font-size: 65px;
+    color: #9a8e84;
+    border-color: 5px;
 }
 
 #gameScore {
@@ -29,12 +36,14 @@ hr {
     position: relative;
 
     font-size: 25px;
+    top: -10px;
     left: 100px;
 }
 
 #restartGame {
     text-align: center;
     position: relative;
+    top: -15px;
     left: 100px;
 }
 
@@ -70,7 +79,7 @@ hr {
 
 #gameBoard {
     position: relative;
-    top: 50px;
+    top: 15px;
     width: 400px;
     height: 400px;
 
@@ -94,6 +103,15 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    animation: show 300ms ease-in-out;
+}
+
+@keyframes show {
+    0% {
+        opacity: .5;
+        transform: scale(0);
+    }
 }
 
 /* tile colours */
