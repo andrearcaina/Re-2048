@@ -5,8 +5,10 @@ const ROWS = 4; const COLS = 4;     //these cannot be changed
 window.onload = () => setupGame();
 
 /*
+    firstly, disables the new game button for 1 second
     reset the game by deleting all the divs present
     and then calling the setUpGame() function to start a new game
+    then enables the new game button again
 */
 function restartGame() {
     for(let row = 0; row < ROWS; row++) {
@@ -15,6 +17,9 @@ function restartGame() {
             gameTile.remove();
         }
     }
+    
+    document.querySelector("button").disabled = true;
+    setTimeout(() => { document.querySelector("button").disabled = false; }, 1000);
     setupGame();
 }
 
@@ -50,11 +55,8 @@ function updateTiles(gameTile, number) {
     gameTile.classList.add("gameTile");
     if (number > 0) {
         gameTile.innerText = number;
-        if (number <= 4096) {
+        if (number <= 16384) {
             gameTile.classList.add("t"+number.toString());
-        }
-        else {
-            gameTile.classList.add("t8192");
         }
     }
 }
