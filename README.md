@@ -4,8 +4,8 @@ My attempt on making the game 2048 with HTML, CSS, JS with mobile input as well!
 - WIP
 
 ### SO FAR
-- Has a New Game Function to reset the game
-- included startup animation load and when pressed new game
-- Shows the 4x4 grid and implements two '2' blocks in the grid
-- Has some gameInfo
-- Shows my Github!
+- Includes startup animation onload 
+  - And when the user presses 'New Game'
+- Displays a 4 by 4 grid that implements two blocks
+  - These blocks are either '2' or '4' onto grid
+- Includes a link to my Github bottom right of the site!
