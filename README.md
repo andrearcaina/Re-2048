@@ -9,3 +9,4 @@ My attempt on making the game 2048 with HTML, CSS, JS with mobile input as well!
 - Displays a 4 by 4 grid that implements two blocks
   - These blocks are either '2' or '4' onto grid
 - Includes a link to my Github bottom right of the site!
+- Has actual game logic! no animation yet. 
