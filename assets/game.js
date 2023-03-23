@@ -1,4 +1,4 @@
-let board; let score = 0;           //these variables can be changed 
+let board; let gameScore = 0;       //these variables can be changed 
 const ROWS = 4; const COLS = 4;     //these cannot be changed
 
 // on load, call setUpGame()
@@ -102,5 +102,18 @@ function blockTwo() {
             gameTile_ID.classList.add("t"+string);
             tileFound = true;
         }
+    }
+}
+
+function gameOver() { 
+    let nonzero = [];
+    for (let row = 0; row < ROWS; row++) {
+        for (let col = 0; col < COLS; col++) {
+            if (board[row][col] > 0) { nonzero.push(board[row][col]); }
+        }
+    }
+    if (nonzero.length == 16) { 
+        //add a transparent overlay that tells
+        //the user that the game is over
     }
 }
