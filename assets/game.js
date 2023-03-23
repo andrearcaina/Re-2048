@@ -11,6 +11,10 @@ window.onload = () => setupGame();
     then enables the new game button again
 */
 function restartGame() {
+    let intScore = document.getElementById("intScore");
+    intScore.innerHTML = "0";
+    gameScore = 0;
+    
     for(let row = 0; row < ROWS; row++) {
         for(let col = 0; col < COLS; col++) {
             let gameTile = document.getElementById(row.toString() + "-" + col.toString());
