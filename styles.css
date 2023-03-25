@@ -3,7 +3,7 @@
 body {
     background-color: rgb(226, 211, 211);
     font-family: "Roboto Mono", sans-serif;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 hr {
@@ -54,9 +54,13 @@ hr {
     background-color: #cdc1b5;
     padding: 10px;
     border-radius: 10px;
+
+    transition: 200ms transform;
 }
 
 .button:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
     background-color: rgba(29, 236, 101, 0.2);
 }
 
