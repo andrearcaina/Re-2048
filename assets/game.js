@@ -55,6 +55,7 @@ async function handleInput(e) {
 
     if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
         newTile.waitForTransition(true).then(() => {
+            player.style.animation = 'fadeIn 2s';
             player.innerHTML = 'Better luck next time!';
             player.appendChild(resetButton);
         })
