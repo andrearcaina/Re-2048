@@ -1,19 +1,36 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono&subset=cyrillic");
 
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: "Roboto Mono", sans-serif;
+}
+
 body {
-    background-color: rgb(226, 211, 211);
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    height: 80vh;
+    margin: 0;
+    
     font-family: "Roboto Mono", sans-serif;
     overflow: hidden;
+    font-size: 5.25vmin;
+    font-weight: bolder;
 }
 
 hr {
     text-align: center;
     position: relative;
     
-    width: 410px;
+    width: 450px;
+
     margin: 0 auto;
-    
-    border: solid rgb(146, 141, 141);
+    margin-top: 150px;
+    margin-bottom: 30px;
+
+    border: solid #f5f1ed;
     border-radius: 5px;
 
     top: 0px;
@@ -23,45 +40,20 @@ hr {
     text-align: center;
     position: relative;
     top: 125px;
-    right: 90px;
 
     font-size: 65px;
-    color: #847971;
+    color: #f5f1ed;
     border-color: 5px;
 }
 
-#gameScore {
-    text-align: center;
-    position: relative;
-
+.display {
+    color: white;
+    
     font-size: 25px;
-    top: -10px;
-    left: 100px;
-}
-
-#restartGame {
     text-align: center;
-    position: relative;
-    top: -15px;
-    left: 100px;
-}
-
-.button {
-    font-family: "Roboto Mono", sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-
-    background-color: #cdc1b5;
-    padding: 10px;
-    border-radius: 10px;
-
-    transition: 200ms transform;
-}
-
-.button:hover {
-    cursor: pointer;
-    transform: translateY(-2px);
-    background-color: rgba(29, 236, 101, 0.2);
+    
+    margin-top: 0.5em;
+    margin-bottom: 1.2em;
 }
 
 #attribution {
@@ -80,138 +72,47 @@ hr {
     box-shadow: 1px 2px 5px 1px rgba(255, 255, 255, 0.2);
 }
 
-#gameBoard {
+#game-board {
     position: relative;
-    top: 15px;
-    width: 400px;
-    height: 400px;
+    display: grid;
+    
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    background-color: #CCC;
+    border-radius: 1vmin;
 
-    background-color: #cdc1b5;
-    border: 6px solid #bbada0;
-    border-radius: 8px;
-
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+    gap: var(--cell-gap);
+    padding: var(--cell-gap);
 }
 
-.gridCell {
-    width: 90px;
-    height: 90px;
-    border: 5px solid #bbada0;
+.cell {
+    background-color: #AAA;
+    border-radius: 1vmin;
+}
 
-    display: flex;
+.tile {
+    position: absolute;
     justify-content: center;
     align-items: center;
-}
-
-.gameTile {
-    width: 90px;
-    height: 90px;
-    border: 5px solid #bbada0;
-
-    font-size: 40px;
+    display: flex;
+    
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 1vmin;
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    
     font-weight: bold;
-
-    position: relative;
-    top: -400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    animation: show 300ms ease-in-out;
-}
-
-#gameOverlay {
-    position: relative;
-    top: 15px;
-    width: 400px;
-    height: 400px;
-
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 6px solid #080808;
-    border-radius: 8px;
-
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+    background-color: hsl(200, 50%, var(--background-lightness));
+    color: hsl(200, 25%, var(--text-lightness));
+    
+    animation: show 200ms ease-in-out;
+    transition: 100ms ease-in-out;
 }
 
 @keyframes show {
     0% {
-        opacity: .2;
+        opacity: .5;
         transform: scale(0);
     }
-}
-
-/* tile colours */
-
-.t2 {
-    background-color: #eee4da;
-    color: #727371;
-}
-
-.t4 {
-    background-color: #ece0ca;
-    color: #727371;
-}
-
-.t8 {
-    background-color: #f4b17a;
-    color: white;
-}
-
-.t16{
-    background-color: #f59575;
-    color: white;
-}
-
-.t32{
-    background-color: #f57c5f;
-    color: white;
-}
-
-.t64{
-    background-color: #f65d3b;
-    color: white;
-}
-
-.t128{
-    background-color: #edce71;
-    color: white;
-}
-
-.t256{
-    background-color: #edcc63;
-    color: white;
-}
-
-.t512{
-    background-color: #edc651;
-    color: white;
-}
-
-.t1024{
-    background-color: #eec744;
-    color: white;
-}
-
-.t2048{
-    background-color: #ecc230;
-    color: white;
-}
-
-.t4096 {
-    background-color: #fe3d3d;
-    color: white;
-}
-
-.t8192 {
-    background-color: #ff2020;
-    color: white;
-}
-
-.t16384 {
-    background-color: black;
-    color: white;
 }

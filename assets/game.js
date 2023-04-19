@@ -1,123 +1,136 @@
-let board; let gameScore = 0;       //these variables can be changed 
-const ROWS = 4; const COLS = 4;     //these cannot be changed
+import Grid from "./grid.js"
+import Tile from "./tile.js"
 
-// on load, call setUpGame()
-window.onload = () => setupGame();
+const gameBoard = document.getElementById("game-board")
+const player = document.querySelector('.player');
 
-/*
-    firstly, disables the new game button for 1 second
-    reset the game by deleting all the divs present
-    and then calling the setUpGame() function to start a new game
-    then enables the new game button again
-*/
-function restartGame() {
-    let intScore = document.getElementById("intScore");
-    intScore.innerHTML = "0";
-    gameScore = 0;
-    
-    for(let row = 0; row < ROWS; row++) {
-        for(let col = 0; col < COLS; col++) {
-            let gameTile = document.getElementById(row.toString() + "-" + col.toString());
-            gameTile.remove();
-        }
-    }
-    
-    document.querySelector("button").disabled = true;
-    setTimeout(() => { document.querySelector("button").disabled = false; }, 1000);
-    setupGame();
+const grid = new Grid(gameBoard)
+grid.randomEmptyCell().tile = new Tile(gameBoard)
+grid.randomEmptyCell().tile = new Tile(gameBoard)
+setupInput()
+
+function setupInput() {
+    window.addEventListener("keydown", handleInput, { once: true })
 }
 
-/* 
-    set up the game board for 2048
-    basically a matrix or a 4x4 array
-*/
-function setupGame() {
-    board =    [[0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0],             
-                [0,0,0,0]
-                ]
-    for(let row = 0; row < ROWS; row++) {
-        for(let col = 0; col < COLS; col++) {
-            let gameTile = document.createElement("div"); 
-            let number = board[row][col];
-            const BOARD = document.getElementById("gameBoard");
-
-            gameTile.id = row.toString() + "-" + col.toString();
-            updateTiles(gameTile, number); BOARD.append(gameTile);
-        }
+async function handleInput(e) {
+    switch (e.key) {
+        case "ArrowUp" || 87:
+            if (!canMoveUp()) {
+                setupInput()
+                return
+            }
+            await moveUp()
+            break
+        case "ArrowDown" || 83:
+            if (!canMoveDown()) {
+                setupInput()
+                return
+            }
+            await moveDown()
+            break
+        case "ArrowLeft" || 65:
+            if (!canMoveLeft()) {
+                setupInput()
+                return
+            }
+            await moveLeft()
+            break
+        case "ArrowRight" || 68:
+            if (!canMoveRight()) {
+                setupInput()
+                return
+            }
+            await moveRight()
+            break
+        default:
+            setupInput()
+            return
     }
-    // setup two tiles at beginning after setup board
-    // this can be implemented later on (once I figure out how to add tiles)
-    blockTwo();
-    blockTwo();
+
+    grid.cells.forEach(cell => cell.mergeTiles())
+
+    const newTile = new Tile(gameBoard)
+    grid.randomEmptyCell().tile = newTile
+
+    if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+        newTile.waitForTransition(true).then(() => {
+            player.innerHTML = 'You Lost!';
+        })
+        return
+    }
+
+    setupInput()
 }
 
-function updateTiles(gameTile, number) {
-    gameTile.innerText = "";
-    gameTile.classList.value = ""; 
-    gameTile.classList.add("gameTile");
-    if (number > 0) {
-        gameTile.innerText = number;
-        if (number <= 16384) {
-            gameTile.classList.add("t"+number.toString());
-        }
-    }
+function moveUp() {
+    return slideTiles(grid.cellsByColumn)
 }
 
-function blockTwo() {
-    let emptyTile = false;
-    let tileFound = false;
+function moveDown() {
+    return slideTiles(grid.cellsByColumn.map(column => [...column].reverse()))
+}
 
-    //checks if there is an empty tile
-    for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-            if (board[row][col] == 0) { 
-                emptyTile = true;
+function moveLeft() {
+    return slideTiles(grid.cellsByRow)
+}
+
+function moveRight() {
+    return slideTiles(grid.cellsByRow.map(row => [...row].reverse()))
+}
+
+function slideTiles(cells) {
+    return Promise.all(
+        cells.flatMap(group => {
+        const promises = []
+        for (let i = 1; i < group.length; i++) {
+            const cell = group[i]
+            if (cell.tile == null) continue
+                let lastValidCell
+            for (let j = i - 1; j >= 0; j--) {
+                const moveToCell = group[j]
+                if (!moveToCell.canAccept(cell.tile)) break
+                lastValidCell = moveToCell
+            }
+
+            if (lastValidCell != null) {
+                promises.push(cell.tile.waitForTransition())
+                if (lastValidCell.tile != null) {
+                    lastValidCell.mergeTile = cell.tile
+                } else {
+                    lastValidCell.tile = cell.tile
+                }
+                cell.tile = null
             }
         }
-    }
-
-    // if there is an empty tile, then return nothing
-    if (!emptyTile) { return; }
-    
-    while (!tileFound) {
-        /*
-            reason to use Math.floor
-            Math.random() returns a random number between (0 and 1)*4
-            resulting in a decimal number between 0 and 4
-            thus, Math.floor returns an integer value of the highest decimal number of that decimal
-        */
-        let row = Math.floor(Math.random() * ROWS);
-        let col = Math.floor(Math.random() * COLS);
-        if (board[row][col] == 0) {
-            board[row][col] = 2;
-            let gameTile_ID = document.getElementById(row.toString() + "-" + col.toString());
-            let percentage = Math.floor((Math.random() * 10)+1);
-            let string = "";
-            /*
-                90% to get a 2
-                10% to get a 4
-            */
-            if (percentage > 1) { string = "2"; }
-            if (percentage == 1) { string = "4"; }
-            
-            gameTile_ID.innerText = string;
-            gameTile_ID.classList.add("t"+string);
-            tileFound = true;
-        }
-    }
+        return promises
+        })
+    )
 }
 
-function gameOver() { 
-    let nonzero = [];
-    for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-            if (board[row][col] > 0) { nonzero.push(board[row][col]); }
-        }
-    }
-    if (nonzero.length == 16) { 
-        //add a transparent overlay that tells
-        //the user that the game is over
-    }
+function canMoveUp() {
+    return canMove(grid.cellsByColumn)
+}
+
+function canMoveDown() {
+    return canMove(grid.cellsByColumn.map(column => [...column].reverse()))
+}
+
+function canMoveLeft() {
+    return canMove(grid.cellsByRow)
+}
+
+function canMoveRight() {
+    return canMove(grid.cellsByRow.map(row => [...row].reverse()))
+}
+
+function canMove(cells) {
+    return cells.some(group => {
+        return group.some((cell, index) => {
+        if (index === 0) return false
+        if (cell.tile == null) return false
+        const moveToCell = group[index - 1]
+        return moveToCell.canAccept(cell.tile)
+        })
+    })
 }

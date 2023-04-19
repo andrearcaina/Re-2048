@@ -6,58 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-2048</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="assets/game.js"></script>
-    <script src="assets/functionality.js"></script>
-    <script src="assets/keys.js"></script>
+    <script src="assets/game.js" type="module"></script>
 </head>
-<body>
-    
-    <div>
-        <h1 id = "gameTitle"> 2048 </h1>
-        <h2 id = "gameScore"> Score: 
-            <span id = "intScore"> 0 </span> 
-        </h2>
-    </div>
-    
-    <div id = "restartGame">
-        <button class = "button" onclick = "restartGame()"> 
-            New Game 
-        </button>
-    </div>
-    
-    <hr>
+    <body>
+        <main>
+            <h1 id = "gameTitle"> 2048 </h1>
 
-    <div id = "gameBoard">
-        <!-- a cell is different from a gameTile 
-        a cell represents the grid itself 
-        while a gameTile represents the actual
-        tile associated with the game -->
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
-        <div class = "gridCell"></div>
+            <hr>
 
-    </div>
+            <div id="game-board"></div>
+            
+            <div class="display player hide"></div>
 
-    <div>  
-        <p id="attribution">
-            Githubbb!
-            <a href="https://github.com/andrearcaina" target="_top">@andrearcaina</a>
-        </p>
-    </div> 
+            <div>  
+                <p id="attribution">
+                    Githubbb!
+                    <a href="https://github.com/andrearcaina" target="_top">@andrearcaina</a>
+                </p>
+            </div> 
 
+        </main>
+    </body>
     <script>
         console.log("        HELLO \n\
         Just multiply by 2 they said \n\
@@ -74,5 +43,4 @@
         Just multiply by 2 they said");
         console.log(`%cwhats up follow me @azdrx on insta`, "color: #228B22; font-size: 1rem; font-weight: bold; font-family: sans-serif;");
     </script>
-</body>
 </html>
