@@ -55,7 +55,8 @@ async function handleInput(e) {
 
     if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
         newTile.waitForTransition(true).then(() => {
-            player.innerHTML = 'You Lost!';
+            player.innerHTML = 'Better luck next time!';
+            player.appendChild(resetButton);
         })
         return
     }
@@ -82,28 +83,28 @@ function moveRight() {
 function slideTiles(cells) {
     return Promise.all(
         cells.flatMap(group => {
-        const promises = []
-        for (let i = 1; i < group.length; i++) {
-            const cell = group[i]
-            if (cell.tile == null) continue
-                let lastValidCell
-            for (let j = i - 1; j >= 0; j--) {
-                const moveToCell = group[j]
-                if (!moveToCell.canAccept(cell.tile)) break
-                lastValidCell = moveToCell
-            }
-
-            if (lastValidCell != null) {
-                promises.push(cell.tile.waitForTransition())
-                if (lastValidCell.tile != null) {
-                    lastValidCell.mergeTile = cell.tile
-                } else {
-                    lastValidCell.tile = cell.tile
+            const promises = []
+            for (let i = 1; i < group.length; i++) {
+                const cell = group[i]
+                if (cell.tile == null) continue
+                    let lastValidCell
+                for (let j = i - 1; j >= 0; j--) {
+                    const moveToCell = group[j]
+                    if (!moveToCell.canAccept(cell.tile)) break
+                    lastValidCell = moveToCell
                 }
-                cell.tile = null
+
+                if (lastValidCell != null) {
+                    promises.push(cell.tile.waitForTransition())
+                    if (lastValidCell.tile != null) {
+                        lastValidCell.mergeTile = cell.tile
+                    } else {
+                        lastValidCell.tile = cell.tile
+                    }
+                    cell.tile = null
+                }
             }
-        }
-        return promises
+            return promises
         })
     )
 }
@@ -134,3 +135,38 @@ function canMove(cells) {
         })
     })
 }
+
+function resetGame() { 
+    player.removeChild(resetButton);
+    player.innerHTML = '';
+    grid.cells.forEach(cell => cell.tile = null);
+    
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => tile.remove());
+
+    grid.randomEmptyCell().tile = new Tile(gameBoard);
+    grid.randomEmptyCell().tile = new Tile(gameBoard);
+    setupInput();
+}
+
+const resetButton = document.createElement('button');
+resetButton.innerHTML = 'Try again!';
+resetButton.addEventListener('click', resetGame);
+
+resetButton.style.backgroundColor = '#AAA';
+resetButton.style.textAlign = 'center';
+resetButton.style.display = 'inline-block';
+resetButton.style.fontSize = '14px';
+resetButton.style.borderRadius = '4px';
+resetButton.style.margin = '4px 2px';
+resetButton.style.cursor = 'pointer';
+resetButton.style.fontWeight = 'bold';
+resetButton.style.height = '30px';
+
+resetButton.addEventListener('mouseover', function() {
+    resetButton.style.backgroundColor = '#a9b7c1';
+});
+
+resetButton.addEventListener('mouseout', function() {
+    resetButton.style.backgroundColor = '#AAA';
+});
