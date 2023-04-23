@@ -37,11 +37,23 @@ hr {
 }
 
 #gameTitle {
-    text-align: center;
     position: relative;
-    top: 125px;
+    top: 165px;
+    text-align: center;
 
     font-size: 65px;
+    color: #f5f1ed;
+    border-color: 5px;
+}
+
+/* style game score and high score so that it is right next to the gameTitle */
+#gameScore {
+    position: relative;
+    top: 125px;
+    
+    text-align: center;
+
+    font-size: 20px;
     color: #f5f1ed;
     border-color: 5px;
 }

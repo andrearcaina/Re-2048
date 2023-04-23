@@ -3,6 +3,8 @@ import Tile from "./tile.js"
 
 const gameBoard = document.getElementById("game-board")
 const player = document.querySelector('.player');
+const score = document.getElementById('Score');
+const high = document.getElementById('High');
 
 const grid = new Grid(gameBoard)
 grid.randomEmptyCell().tile = new Tile(gameBoard)
@@ -58,6 +60,17 @@ async function handleInput(e) {
             player.style.animation = 'fadeIn 2s';
             player.innerHTML = 'Better luck next time!';
             player.appendChild(resetButton);
+
+            let gameScore = score.innerHTML;
+            let highScore = high.innerHTML;
+            console.log(gameScore);
+            console.log(highScore);
+
+            if (gameScore > highScore) {
+                high.innerHTML = score.innerHTML;
+                console.log(score.innerHTML);
+                console.log(high.innerHTML);
+            }
         })
         return
     }
@@ -142,6 +155,8 @@ function resetGame() {
     player.innerHTML = '';
     grid.cells.forEach(cell => cell.tile = null);
     
+    score.innerHTML = 0;
+
     const tiles = document.querySelectorAll('.tile');
     tiles.forEach(tile => tile.remove());
 
